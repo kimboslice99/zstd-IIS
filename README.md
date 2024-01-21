@@ -17,8 +17,8 @@ msbuild zstdIIS.vcxproj /p:Configuration=Release;Platform=x64
 ## Setup
 compression levels in zstd can be negative, but we cant specify a negative here, so anything up to 100 is a negative range and anything over 100 is a positive range
 ```
-(lowest)  (middle)    (highest)
- 1 2 3 ... 22 101 ... 120 121 122
+(fastest)       (middle)       (slowest)
+-22 -21 -20 ... -1 0 101 ... 120 121 122 <-- dont use these extreme compression levels, they *will* cause issues
 ```
 From zstd manual
 ```
@@ -28,12 +28,13 @@ Default level is ZSTD_CLEVEL_DEFAULT==3
 ```xml
 <httpCompression>
     ...
-    <scheme name="zstd" dll="%ProgramFiles%\path\to\zstd.dll" dynamicCompressionLevel="30" staticCompressionLevel="35" />
+    <scheme name="zstd" dll="%ProgramFiles%\path\to\zstd.dll" dynamicCompressionLevel="0" staticCompressionLevel="106" />
     ...
 </httpCompression>
 ```
 
 ## Todo
  - Improve this readme
+ - Make it faster? Brotli is still more efficient, according to my limited testing
 
 Thanks to [@saucecontrol](https://github.com/saucecontrol) for Brotli-IIS being a great starting point at getting this done
