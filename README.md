@@ -15,10 +15,15 @@ cd src
 msbuild zstdIIS.vcxproj /p:Configuration=Release;Platform=x64
 ```
 ## Setup
-compression levels in zstd can be negative, but we cant specify a negative here, so anything over 22 has 23 substracted from it, else multiply by -1, the following illustration should explain how to set dynamicCompressionLevel & staticCompressionLevel
+compression levels in zstd can be negative, but we cant specify a negative here, so anything up to 100 is a negative range and anything over 100 is a positive range
 ```
-(lowest)    (middle)      (highest)
-1 2 3 ... 22 (0 23) 24 ... 43 44 45
+(lowest)  (middle)    (highest)
+ 1 2 3 ... 22 101 ... 120 121 122
+```
+From zstd manual
+```
+value 0 means default, which is controlled by ZSTD_CLEVEL_DEFAULT.
+Default level is ZSTD_CLEVEL_DEFAULT==3
 ```
 ```xml
 <httpCompression>
@@ -30,6 +35,5 @@ compression levels in zstd can be negative, but we cant specify a negative here,
 
 ## Todo
  - Improve this readme
- - A better solution for negative compression levels?
 
 Thanks to [@saucecontrol](https://github.com/saucecontrol) for Brotli-IIS being a great starting point at getting this done

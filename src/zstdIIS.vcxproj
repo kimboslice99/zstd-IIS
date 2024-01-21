@@ -86,9 +86,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cmd /c C:\build\reload.bat</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
@@ -109,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="zstd.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="zstd.def" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="zstd.rc" />
