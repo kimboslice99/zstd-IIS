@@ -18,7 +18,7 @@ msbuild zstdIIS.vcxproj /p:Configuration=Release;Platform=x64
 compression levels in zstd can be negative, but we cant specify a negative here, so anything up to 100 is a negative range and anything over 100 is a positive range
 ```
 (fastest)      (middle)      (slowest)
--22 -21 -20 ... -1 101 ... 120 121 122 <-- dont use these extreme compression levels, they *will* cause issues
+-5 -4 ... -1 101 ... 120 121 122 <-- dont use these extreme compression levels, they *will* cause issues
 ```
 From zstd manual
 ```
