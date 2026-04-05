@@ -7,11 +7,17 @@ git clone https://github.com/kimboslice99/zstd-IIS.git
 cd zstd-IIS
 git submodule init
 git submodule update
-pushd zstd\build\cmake
-cmake .
+# x64
+cmake -A x64 -S zstd\build\cmake -B zstd\build\cmake\x64
+pushd zstd\build\cmake\x64
+msbuild zstd.sln -target:libzstd_static:Rebuild /p:Configuration=Release
+# x86
+popd && pushd zstd\build\cmake\Win32
+cmake -A Win32 -S zstd\build\cmake -B zstd\build\cmake\Win32
 msbuild zstd.sln -target:libzstd_static:Rebuild /p:Configuration=Release
 popd
 cd src
+msbuild zstdIIS.vcxproj /p:Configuration=Release;Platform=Win32
 msbuild zstdIIS.vcxproj /p:Configuration=Release;Platform=x64
 ```
 ## Setup
